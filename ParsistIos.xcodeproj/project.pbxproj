@@ -8,22 +8,32 @@
 
 /* Begin PBXBuildFile section */
 		2DF590CA21F5FE56006E619D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DF590C921F5FE56006E619D /* AppDelegate.swift */; };
-		2DF590CC21F5FE56006E619D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DF590CB21F5FE56006E619D /* ViewController.swift */; };
+		2DF590CC21F5FE56006E619D /* mapVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DF590CB21F5FE56006E619D /* mapVC.swift */; };
 		2DF590CF21F5FE56006E619D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2DF590CD21F5FE56006E619D /* Main.storyboard */; };
 		2DF590D221F5FE56006E619D /* ParsistIos.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2DF590D021F5FE56006E619D /* ParsistIos.xcdatamodeld */; };
 		2DF590D421F5FE59006E619D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2DF590D321F5FE59006E619D /* Assets.xcassets */; };
 		2DF590D721F5FE59006E619D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2DF590D521F5FE59006E619D /* LaunchScreen.storyboard */; };
+		2DF590DF21F600D2006E619D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2DF590DE21F600D2006E619D /* GoogleService-Info.plist */; };
+		2DF590E121F60586006E619D /* placesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DF590E021F60586006E619D /* placesVC.swift */; };
+		2DF590E321F605C3006E619D /* detailsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DF590E221F605C3006E619D /* detailsVC.swift */; };
+		856E1232F81CD21E48F501B6 /* Pods_ParsistIos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F7BDEC7B72A8410686EDCAA /* Pods_ParsistIos.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		2DF590C621F5FE56006E619D /* ParsistIos.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ParsistIos.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2DF590C921F5FE56006E619D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		2DF590CB21F5FE56006E619D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		2DF590CB21F5FE56006E619D /* mapVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mapVC.swift; sourceTree = "<group>"; };
 		2DF590CE21F5FE56006E619D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		2DF590D121F5FE56006E619D /* ParsistIos.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ParsistIos.xcdatamodel; sourceTree = "<group>"; };
 		2DF590D321F5FE59006E619D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2DF590D621F5FE59006E619D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2DF590D821F5FE59006E619D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2DF590DE21F600D2006E619D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		2DF590E021F60586006E619D /* placesVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = placesVC.swift; sourceTree = "<group>"; };
+		2DF590E221F605C3006E619D /* detailsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = detailsVC.swift; sourceTree = "<group>"; };
+		3EA3C241A8D396C144167401 /* Pods-ParsistIos.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ParsistIos.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ParsistIos/Pods-ParsistIos.debug.xcconfig"; sourceTree = "<group>"; };
+		4F7BDEC7B72A8410686EDCAA /* Pods_ParsistIos.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ParsistIos.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7381D50D9AFE295E188D63C7 /* Pods-ParsistIos.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ParsistIos.release.xcconfig"; path = "Pods/Target Support Files/Pods-ParsistIos/Pods-ParsistIos.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,17 +41,29 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				856E1232F81CD21E48F501B6 /* Pods_ParsistIos.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		176E9470863B1F24CBE79C34 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				3EA3C241A8D396C144167401 /* Pods-ParsistIos.debug.xcconfig */,
+				7381D50D9AFE295E188D63C7 /* Pods-ParsistIos.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		2DF590BD21F5FE56006E619D = {
 			isa = PBXGroup;
 			children = (
 				2DF590C821F5FE56006E619D /* ParsistIos */,
 				2DF590C721F5FE56006E619D /* Products */,
+				176E9470863B1F24CBE79C34 /* Pods */,
+				4C2A7E8071C65E40A2C8476F /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -57,14 +79,25 @@
 			isa = PBXGroup;
 			children = (
 				2DF590C921F5FE56006E619D /* AppDelegate.swift */,
-				2DF590CB21F5FE56006E619D /* ViewController.swift */,
+				2DF590CB21F5FE56006E619D /* mapVC.swift */,
+				2DF590E021F60586006E619D /* placesVC.swift */,
+				2DF590E221F605C3006E619D /* detailsVC.swift */,
 				2DF590CD21F5FE56006E619D /* Main.storyboard */,
 				2DF590D321F5FE59006E619D /* Assets.xcassets */,
 				2DF590D521F5FE59006E619D /* LaunchScreen.storyboard */,
 				2DF590D821F5FE59006E619D /* Info.plist */,
 				2DF590D021F5FE56006E619D /* ParsistIos.xcdatamodeld */,
+				2DF590DE21F600D2006E619D /* GoogleService-Info.plist */,
 			);
 			path = ParsistIos;
+			sourceTree = "<group>";
+		};
+		4C2A7E8071C65E40A2C8476F /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				4F7BDEC7B72A8410686EDCAA /* Pods_ParsistIos.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -74,9 +107,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 2DF590DB21F5FE59006E619D /* Build configuration list for PBXNativeTarget "ParsistIos" */;
 			buildPhases = (
+				35683C841AA6D3007CE7B002 /* [CP] Check Pods Manifest.lock */,
 				2DF590C221F5FE56006E619D /* Sources */,
 				2DF590C321F5FE56006E619D /* Frameworks */,
 				2DF590C421F5FE56006E619D /* Resources */,
+				F2C20C374B94A550FB777DAB /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -127,11 +162,69 @@
 			files = (
 				2DF590D721F5FE59006E619D /* LaunchScreen.storyboard in Resources */,
 				2DF590D421F5FE59006E619D /* Assets.xcassets in Resources */,
+				2DF590DF21F600D2006E619D /* GoogleService-Info.plist in Resources */,
 				2DF590CF21F5FE56006E619D /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		35683C841AA6D3007CE7B002 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-ParsistIos-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F2C20C374B94A550FB777DAB /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-ParsistIos/Pods-ParsistIos-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
+				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
+				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
+				"${BUILT_PRODUCTS_DIR}/libwebp/libwebp.framework",
+				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/libwebp.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ParsistIos/Pods-ParsistIos-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		2DF590C221F5FE56006E619D /* Sources */ = {
@@ -139,7 +232,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				2DF590D221F5FE56006E619D /* ParsistIos.xcdatamodeld in Sources */,
-				2DF590CC21F5FE56006E619D /* ViewController.swift in Sources */,
+				2DF590CC21F5FE56006E619D /* mapVC.swift in Sources */,
+				2DF590E321F605C3006E619D /* detailsVC.swift in Sources */,
+				2DF590E121F60586006E619D /* placesVC.swift in Sources */,
 				2DF590CA21F5FE56006E619D /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -284,6 +379,7 @@
 		};
 		2DF590DC21F5FE59006E619D /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3EA3C241A8D396C144167401 /* Pods-ParsistIos.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -302,6 +398,7 @@
 		};
 		2DF590DD21F5FE59006E619D /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7381D50D9AFE295E188D63C7 /* Pods-ParsistIos.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
