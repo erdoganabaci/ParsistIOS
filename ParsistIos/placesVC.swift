@@ -16,10 +16,17 @@ class placesVC: UIViewController , UITableViewDelegate , UITableViewDataSource {
     @IBOutlet weak var tableView: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
-        getData()
+        getDataFromFirebase()
         tableView.delegate = self
         tableView.dataSource = self
        
+    }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "fromplacesVCtodetailsVC" {
+            let destinationVC = segue.destination as! detailsVC
+                destinationVC.selectedPlace = self.chosenPlace //tableviewdaki ismi detailVC ye aktardık
+            
+        }
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         self.chosenPlace = placeNameArray[indexPath.row]
@@ -31,11 +38,11 @@ class placesVC: UIViewController , UITableViewDelegate , UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell()
-        cell.textLabel?.text = placeNameArray[indexPath.row]
+        cell.textLabel?.text = placeNameArray[indexPath.row].capitalized
         return cell
     }
     
-    func getData(){
+    func getDataFromFirebase(){
         self.placeNameArray.removeAll(keepingCapacity: false) //array güvenliği her çalıştırıldığında sıfırlanacak.
         let databaseReference = Database.database().reference()
         databaseReference.child("Locations").observe(DataEventType.childAdded, with: { (snapshot) in
