@@ -18,6 +18,7 @@ class mapVC: UIViewController,MKMapViewDelegate , CLLocationManagerDelegate {
     var location = CLLocationCoordinate2D()
     var chosenLatitute = [String]()
     var chosenLongitute = [String]()
+    var poiCoodinates: CLLocationCoordinate2D = CLLocationCoordinate2D()
     
     var nameArray = [String]()
     var typeArray = [String]()
@@ -92,13 +93,13 @@ class mapVC: UIViewController,MKMapViewDelegate , CLLocationManagerDelegate {
                 let singleLocation = values[id] as! NSDictionary
                 let annotations = MKPointAnnotation()
                 annotations.title = singleLocation["parkname"] as! String
-                var poiCoodinates: CLLocationCoordinate2D = CLLocationCoordinate2D()
                 
-                poiCoodinates.latitude = CDouble(singleLocation["latitute"] as! String)!
-                poiCoodinates.longitude = CDouble(singleLocation["longitute"] as! String )!
+                
+                self.poiCoodinates.latitude = CDouble(singleLocation["latitute"] as! String)!
+                self.poiCoodinates.longitude = CDouble(singleLocation["longitute"] as! String )!
                 //print("name \(name)")
                // annotations.coordinate = CLLocationCoordinate2D(latitude: doubleLat as! Double, longitude: self.doubleLongitute as! Double)
-                annotations.coordinate = CLLocationCoordinate2D(latitude:poiCoodinates.latitude , longitude:poiCoodinates.longitude)
+                annotations.coordinate = CLLocationCoordinate2D(latitude:self.poiCoodinates.latitude , longitude:self.poiCoodinates.longitude)
                 self.mapView.addAnnotation(annotations)
             }
             
@@ -161,7 +162,47 @@ class mapVC: UIViewController,MKMapViewDelegate , CLLocationManagerDelegate {
         
     
     }
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        //fonksiyonu override ediyruz ve harita pinlerini özelleştirebiliyoruz.
+        if annotation is MKUserLocation { //lokasyonla ilgili anatasyonsa hiçbirşey yapma.
+            return nil
+        }
+        let reuseID = "pin"
+        var pinView = mapView.dequeueReusableAnnotationView(withIdentifier: reuseID)
+        if pinView == nil {
+            pinView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: reuseID)
+            pinView?.canShowCallout = true //yanına buton eklenebilir mi evet diyoruz
+            let button = UIButton(type: .detailDisclosure)
+            //let button1 = UIButton(type: .infoLight)
+            pinView?.rightCalloutAccessoryView = button
+            //pinView?.leftCalloutAccessoryView = button1
+            
+        }else{
+            pinView?.annotation = annotation //böylece pinviewı customize ettik.
+        }
+        
+        
+        
+        return pinView
+    }
     
+    func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
+        //pinlerin butonuna tıklayınca navigasyona yollucaz
+        self.requestCLlocation = CLLocation(latitude: Double(self.poiCoodinates.latitude), longitude: Double(self.poiCoodinates.longitude))
+            CLGeocoder().reverseGeocodeLocation(requestCLlocation) { (placemarks, error) in
+                if let placemark = placemarks{
+                    if placemark.count > 0 { //diziden adres alabildiysem
+                        let mkPlaceMark = MKPlacemark(placemark: placemark[0])
+                        let mapItem = MKMapItem(placemark: mkPlaceMark)
+                        mapItem.name = self.nameArray[0] as! String
+                        //navigyonu kullandığım kısım
+                        let launchOptions = [MKLaunchOptionsDirectionsModeKey : MKLaunchOptionsDirectionsModeDriving]
+                        mapItem.openInMaps(launchOptions: launchOptions)
+                    }
+                }
+            }
+        
+    }
     @IBAction func parkListClicked(_ sender: Any) {
         self.performSegue(withIdentifier: "frommapVCtoplacesVC", sender: nil)
     }
