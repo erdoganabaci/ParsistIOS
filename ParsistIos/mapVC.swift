@@ -36,9 +36,12 @@ class mapVC: UIViewController,MKMapViewDelegate , CLLocationManagerDelegate {
         manager.desiredAccuracy = kCLLocationAccuracyBest
         manager.requestWhenInUseAuthorization()
         manager.startUpdatingLocation()
+        mapView.showsUserLocation = true
         //manager.startUpdatingLocation() //veriler yokken güncellemek mantıksız veriler olduğunda güncelle.
         //locasyon update durdurmayı unutma locationmanager çağrılınca iptal etsin güncellemeyi.
         createLocation()
+      
+       
     }
   
     func getDataFromFirebase(){
@@ -82,15 +85,35 @@ class mapVC: UIViewController,MKMapViewDelegate , CLLocationManagerDelegate {
           */
                
             }
+          
             //print("Lat datası \(self.latituteArray)")
-            
-            for doubleLat in self.doubleLatitute{
+         
+            for id in locationID{
+                let singleLocation = values[id] as! NSDictionary
                 let annotations = MKPointAnnotation()
-                annotations.title = self.nameArray as? String
-                annotations.coordinate = CLLocationCoordinate2D(latitude: doubleLat as! Double, longitude: self.doubleLongitute as! Double)
+                annotations.title = singleLocation["parkname"] as! String
+                var poiCoodinates: CLLocationCoordinate2D = CLLocationCoordinate2D()
+                
+                poiCoodinates.latitude = CDouble(singleLocation["latitute"] as! String)!
+                poiCoodinates.longitude = CDouble(singleLocation["longitute"] as! String )!
+                //print("name \(name)")
+               // annotations.coordinate = CLLocationCoordinate2D(latitude: doubleLat as! Double, longitude: self.doubleLongitute as! Double)
+                annotations.coordinate = CLLocationCoordinate2D(latitude:poiCoodinates.latitude , longitude:poiCoodinates.longitude)
                 self.mapView.addAnnotation(annotations)
             }
             
+            /*
+            for name in self.nameArray{
+                let annotations = MKPointAnnotation()
+                annotations.title = name
+                print("name \(name)")
+                // annotations.coordinate = CLLocationCoordinate2D(latitude: doubleLat as! Double, longitude: self.doubleLongitute as! Double)
+                annotations.coordinate = CLLocationCoordinate2D(latitude:CDouble(exactly: self.latituteArray), longitude:self.doubleLongitute as! Double)
+                self.mapView.addAnnotation(annotations)
+            }
+            
+            
+         */
             
         }) { (error) in
             let alert = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: UIAlertController.Style.alert   )
@@ -101,60 +124,42 @@ class mapVC: UIViewController,MKMapViewDelegate , CLLocationManagerDelegate {
       
     }
     func createLocation(){
-        let x = ["1.0", "1.5", "2.0"]
-        print("tamamı : \(x.map {Double($0)!})")
-        let doubleArray = latituteArray.map{ Double($0)! }
-        print(latituteArray)
-        let doubleLatitute = latituteArray.map {Double($0)!}
-        print(doubleLatitute)
-        let doubleLongitute = longituteArray.map {Double($0)!}
-        for location in doubleLatitute{
-            let annotations = MKPointAnnotation()
-            annotations.title = nameArray as? String
-            annotations.coordinate = CLLocationCoordinate2D(latitude: location, longitude: doubleLongitute as! Double)
-            mapView.addAnnotation(annotations)
-        }
-        
+     
         
     }
-    func newTestFirebase () {
-        let ref = Database.database().reference().child("Locations")
-        let query = ref.queryOrdered(byChild: "post").queryEqual(toValue: true)
-        query.observeSingleEvent(of: .childAdded) { (snapshot) in
-            for childSnapshot in snapshot.children{
-                print(childSnapshot)
+ 
+    
+    func allMapAnnotation(){
+        for doubleLat in self.doubleLatitute{
+            
+            for doubleLong in self.doubleLongitute {
+                
+                let annotations = MKPointAnnotation()
+                
+                annotations.coordinate = CLLocationCoordinate2D(latitude: doubleLat, longitude: doubleLong)
+                
+                //annotations.title = nameArray as! String  //bunu ekleyince çalışmıyor loopta yok diye yada loopda dönerken hata veriyor.
+                
+                self.mapView.addAnnotation(annotations)
+                
             }
-        }
     }
+}
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        if self.chosenLatitute != nil && self.chosenLongitute != nil {
-            
-            for lat in latituteArray{
-                 //location = CLLocationCoordinate2D(latitude: Double(lat)!, longitude: Double(self.longituteArray)?)
-            }
-            for (lat,long) in zip(self.chosenLatitute,self.chosenLongitute){
-                location = CLLocationCoordinate2D(latitude: Double(lat)!, longitude: Double(long)!)
-                let span = MKCoordinateSpan(latitudeDelta: 0.1, longitudeDelta: 0.1)
-                let region = MKCoordinateRegion(center: location, span: span)
-                self.mapView.setRegion(region, animated: true)
-                let annotation = MKPointAnnotation()
-                annotation.coordinate = location
-                self.mapView.addAnnotation(annotation)
-                print("location : \(location)")
-            }
-            
-           // let location = CLLocationCoordinate2D(latitude: Double(self.chosenLatitute)!, longitude: Double(self.chosenLongitute)!)
+        //locasyon update edildiğinde  kullanıcıya focus atması için
+            let location = CLLocationCoordinate2D(latitude: locations[0].coordinate.latitude, longitude: locations[0].coordinate.longitude)
+            let span = MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
+            let region = MKCoordinateRegion(center: location, span: span)
+            mapView.setRegion(region, animated: true)
+        
+        
             
             manager.stopUpdatingLocation()
             
             
-           // annotation.title = self.nameArray.last!
-           // annotation.subtitle = self.typeArray.last!
-            
-            //print("seçilnmiş koridnat lat \(self.chosenLatitute)")
-        }
         
+    
     }
     
     @IBAction func parkListClicked(_ sender: Any) {
