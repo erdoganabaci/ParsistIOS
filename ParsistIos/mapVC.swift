@@ -28,6 +28,7 @@ class mapVC: UIViewController,MKMapViewDelegate , CLLocationManagerDelegate {
     var imageArray = [String]()
     var doubleLatitute = [Double]()
     var doubleLongitute = [Double]()
+    var resimUrl = ""
     override func viewDidLoad() {
         super.viewDidLoad()
         mapView.delegate = self
@@ -92,8 +93,10 @@ class mapVC: UIViewController,MKMapViewDelegate , CLLocationManagerDelegate {
             for id in locationID{
                 let singleLocation = values[id] as! NSDictionary
                 let annotations = MKPointAnnotation()
-                annotations.title = singleLocation["parkname"] as! String
-                
+                let annotTitle = singleLocation["parkname"] as! String
+                self.resimUrl = singleLocation["downloadurl"] as! String
+                annotations.title = annotTitle.capitalized
+               
                 
                 self.poiCoodinates.latitude = CDouble(singleLocation["latitute"] as! String)!
                 self.poiCoodinates.longitude = CDouble(singleLocation["longitute"] as! String )!
@@ -162,6 +165,11 @@ class mapVC: UIViewController,MKMapViewDelegate , CLLocationManagerDelegate {
         
     
     }
+    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
+        var selectedAnnotation = view.annotation
+        print("başlığı seçtim \(selectedAnnotation?.title)")
+    }
+    
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         //fonksiyonu override ediyruz ve harita pinlerini özelleştirebiliyoruz.
         if annotation is MKUserLocation { //lokasyonla ilgili anatasyonsa hiçbirşey yapma.
@@ -172,6 +180,7 @@ class mapVC: UIViewController,MKMapViewDelegate , CLLocationManagerDelegate {
         if pinView == nil {
             pinView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: reuseID)
             pinView?.canShowCallout = true //yanına buton eklenebilir mi evet diyoruz
+            //pinView?.image = UIImage(named: "cat.png")
             ///let button = UIButton(type: .detailDisclosure)
             //let button1 = UIButton(type: .infoLight)
             ///pinView?.rightCalloutAccessoryView = button
@@ -181,10 +190,41 @@ class mapVC: UIViewController,MKMapViewDelegate , CLLocationManagerDelegate {
             pinView?.annotation = annotation //böylece pinviewı customize ettik.
         }
         
-        pinView?.detailCalloutAccessoryView = UIImageView(image: UIImage(named: "res.jpeg"))
+        let databaseReference = Database.database().reference().child("Locations").child("post")
+        databaseReference.queryOrdered(byChild: "parkname").queryEqual(toValue: pinView?.annotation?.title as! String).observe(DataEventType.childAdded) { (snapshot) in
+            if snapshot.exists(){
+                let values = snapshot.value! as! NSDictionary
+                self.resimUrl =  values["downloadurl"] as! String
+                print("filtreli resim:\(pinView?.annotation?.title) ---> \(self.resimUrl)")
+                if let url = NSURL(string: self.resimUrl){
+                    if let data = NSData(contentsOf: url as! URL){
+                       // let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 50, height: 50))
+                        //let myImage = imageView.sd_setImage(with: URL(string: self.resimUrl as! String))
+                        //pinView?.detailCalloutAccessoryView = UIImageView(image: UIImage(data: data as! Data, scale: 50))
+                       // pinView?.detailCalloutAccessoryView = UIImageView(frame: CGRect()
+                        let width = 100
+                        let height = 100
+                        
+                        let snapshotView = UIView()
+                        let views = ["snapshotView": snapshotView]
+                        snapshotView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:[snapshotView(100)]", options: [], metrics: nil, views: views))
+                        snapshotView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:[snapshotView(100)]", options: [], metrics: nil, views: views))
+                        let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
+                        let myImage = imageView.sd_setImage(with: URL(string: self.resimUrl as! String))
+                        snapshotView.addSubview(imageView)
+                        pinView?.detailCalloutAccessoryView = snapshotView
+                    }
+                }
+            }
+        }
+        
+        print("pinview annot title \(pinView?.annotation?.title) )")
+        
+        
+        //print("Benim image arraylerim : \(resimUrl)")
         //left
         let leftAccessory = UILabel(frame: CGRect(x: 0,y: 0,width: 50,height: 30))
-        leftAccessory.text = "sallama"
+        leftAccessory.text = "sol taraf"
         leftAccessory.font = UIFont(name: "Verdana", size: 10)
         pinView?.leftCalloutAccessoryView = leftAccessory
         
@@ -208,7 +248,7 @@ class mapVC: UIViewController,MKMapViewDelegate , CLLocationManagerDelegate {
                     if placemark.count > 0 { //diziden adres alabildiysem
                         let mkPlaceMark = MKPlacemark(placemark: placemark[0])
                         let mapItem = MKMapItem(placemark: mkPlaceMark)
-                        mapItem.name = self.nameArray[0] as! String
+                        mapItem.name = self.nameArray[0].capitalized as! String
                         //navigyonu kullandığım kısım
                         let launchOptions = [MKLaunchOptionsDirectionsModeKey : MKLaunchOptionsDirectionsModeDriving]
                         mapItem.openInMaps(launchOptions: launchOptions)
