@@ -154,7 +154,7 @@ class mapVC: UIViewController,MKMapViewDelegate , CLLocationManagerDelegate {
             let region = MKCoordinateRegion(center: location, span: span)
             mapView.setRegion(region, animated: true)
         
-        
+            
             
             manager.stopUpdatingLocation()
             
@@ -172,16 +172,30 @@ class mapVC: UIViewController,MKMapViewDelegate , CLLocationManagerDelegate {
         if pinView == nil {
             pinView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: reuseID)
             pinView?.canShowCallout = true //yanına buton eklenebilir mi evet diyoruz
-            let button = UIButton(type: .detailDisclosure)
+            ///let button = UIButton(type: .detailDisclosure)
             //let button1 = UIButton(type: .infoLight)
-            pinView?.rightCalloutAccessoryView = button
+            ///pinView?.rightCalloutAccessoryView = button
             //pinView?.leftCalloutAccessoryView = button1
             
         }else{
             pinView?.annotation = annotation //böylece pinviewı customize ettik.
         }
         
+        pinView?.detailCalloutAccessoryView = UIImageView(image: UIImage(named: "res.jpeg"))
+        //left
+        let leftAccessory = UILabel(frame: CGRect(x: 0,y: 0,width: 50,height: 30))
+        leftAccessory.text = "sallama"
+        leftAccessory.font = UIFont(name: "Verdana", size: 10)
+        pinView?.leftCalloutAccessoryView = leftAccessory
         
+        // Right accessory view
+        let image = UIImage(named: "nav.png")
+        let button = UIButton(type: .custom)
+        button.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
+        button.setImage(image, for: UIControl.State())
+        pinView?.rightCalloutAccessoryView = button
+        
+       
         
         return pinView
     }

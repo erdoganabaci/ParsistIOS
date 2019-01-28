@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2D9BA55021FE16F400750032 /* cat.png in Resources */ = {isa = PBXBuildFile; fileRef = 2D9BA54F21FE16F400750032 /* cat.png */; };
+		2D9BA55221FE196E00750032 /* nav.png in Resources */ = {isa = PBXBuildFile; fileRef = 2D9BA55121FE196E00750032 /* nav.png */; };
+		2D9BA55421FE19DD00750032 /* res.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 2D9BA55321FE19DD00750032 /* res.jpeg */; };
 		2DF590CA21F5FE56006E619D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DF590C921F5FE56006E619D /* AppDelegate.swift */; };
 		2DF590CC21F5FE56006E619D /* mapVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DF590CB21F5FE56006E619D /* mapVC.swift */; };
 		2DF590CF21F5FE56006E619D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2DF590CD21F5FE56006E619D /* Main.storyboard */; };
@@ -20,6 +23,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2D9BA54F21FE16F400750032 /* cat.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cat.png; sourceTree = "<group>"; };
+		2D9BA55121FE196E00750032 /* nav.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = nav.png; sourceTree = "<group>"; };
+		2D9BA55321FE19DD00750032 /* res.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = res.jpeg; sourceTree = "<group>"; };
 		2DF590C621F5FE56006E619D /* ParsistIos.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ParsistIos.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2DF590C921F5FE56006E619D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2DF590CB21F5FE56006E619D /* mapVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mapVC.swift; sourceTree = "<group>"; };
@@ -78,6 +84,9 @@
 		2DF590C821F5FE56006E619D /* ParsistIos */ = {
 			isa = PBXGroup;
 			children = (
+				2D9BA55321FE19DD00750032 /* res.jpeg */,
+				2D9BA55121FE196E00750032 /* nav.png */,
+				2D9BA54F21FE16F400750032 /* cat.png */,
 				2DF590C921F5FE56006E619D /* AppDelegate.swift */,
 				2DF590CB21F5FE56006E619D /* mapVC.swift */,
 				2DF590E021F60586006E619D /* placesVC.swift */,
@@ -160,9 +169,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2D9BA55421FE19DD00750032 /* res.jpeg in Resources */,
+				2D9BA55021FE16F400750032 /* cat.png in Resources */,
 				2DF590D721F5FE59006E619D /* LaunchScreen.storyboard in Resources */,
 				2DF590D421F5FE59006E619D /* Assets.xcassets in Resources */,
 				2DF590DF21F600D2006E619D /* GoogleService-Info.plist in Resources */,
+				2D9BA55221FE196E00750032 /* nav.png in Resources */,
 				2DF590CF21F5FE56006E619D /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
