@@ -12,6 +12,9 @@ import Firebase
 import FirebaseStorage
 import FirebaseDatabase
 class mapVC: UIViewController,MKMapViewDelegate , CLLocationManagerDelegate {
+   
+    
+    @IBOutlet weak var indicatorActivity: UIActivityIndicatorView!
     @IBOutlet weak var mapView: MKMapView!
     var manager = CLLocationManager()
     var requestCLlocation = CLLocation()
@@ -29,8 +32,12 @@ class mapVC: UIViewController,MKMapViewDelegate , CLLocationManagerDelegate {
     var doubleLatitute = [Double]()
     var doubleLongitute = [Double]()
     var resimUrl = ""
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        indicatorActivity.isHidden = false
+        indicatorActivity.startAnimating()
+    
         mapView.delegate = self
         manager.delegate = self
         getDataFromFirebase()
@@ -41,7 +48,9 @@ class mapVC: UIViewController,MKMapViewDelegate , CLLocationManagerDelegate {
         mapView.showsUserLocation = true
         //manager.startUpdatingLocation() //veriler yokken güncellemek mantıksız veriler olduğunda güncelle.
         //locasyon update durdurmayı unutma locationmanager çağrılınca iptal etsin güncellemeyi.
+      
         createLocation()
+      
       
        
     }
@@ -95,8 +104,8 @@ class mapVC: UIViewController,MKMapViewDelegate , CLLocationManagerDelegate {
                 let annotations = MKPointAnnotation()
                 let annotTitle = singleLocation["parkname"] as! String
                 self.resimUrl = singleLocation["downloadurl"] as! String
-                annotations.title = annotTitle.capitalized
-               
+                annotations.title = annotTitle
+                
                 
                 self.poiCoodinates.latitude = CDouble(singleLocation["latitute"] as! String)!
                 self.poiCoodinates.longitude = CDouble(singleLocation["longitute"] as! String )!
@@ -104,6 +113,7 @@ class mapVC: UIViewController,MKMapViewDelegate , CLLocationManagerDelegate {
                // annotations.coordinate = CLLocationCoordinate2D(latitude: doubleLat as! Double, longitude: self.doubleLongitute as! Double)
                 annotations.coordinate = CLLocationCoordinate2D(latitude:self.poiCoodinates.latitude , longitude:self.poiCoodinates.longitude)
                 self.mapView.addAnnotation(annotations)
+                
             }
             
             /*
@@ -165,13 +175,11 @@ class mapVC: UIViewController,MKMapViewDelegate , CLLocationManagerDelegate {
         
     
     }
-    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
-        var selectedAnnotation = view.annotation
-        print("başlığı seçtim \(selectedAnnotation?.title)")
-    }
+   
     
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         //fonksiyonu override ediyruz ve harita pinlerini özelleştirebiliyoruz.
+     
         if annotation is MKUserLocation { //lokasyonla ilgili anatasyonsa hiçbirşey yapma.
             return nil
         }
@@ -180,7 +188,9 @@ class mapVC: UIViewController,MKMapViewDelegate , CLLocationManagerDelegate {
         if pinView == nil {
             pinView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: reuseID)
             pinView?.canShowCallout = true //yanına buton eklenebilir mi evet diyoruz
-            //pinView?.image = UIImage(named: "cat.png")
+            pinView?.tintColor = UIColor.black
+            
+            pinView?.image = UIImage(named: "cat.png")
             ///let button = UIButton(type: .detailDisclosure)
             //let button1 = UIButton(type: .infoLight)
             ///pinView?.rightCalloutAccessoryView = button
@@ -188,7 +198,10 @@ class mapVC: UIViewController,MKMapViewDelegate , CLLocationManagerDelegate {
             
         }else{
             pinView?.annotation = annotation //böylece pinviewı customize ettik.
+            
         }
+        
+       print("resim urlleri \(imageArray)")
         
         let databaseReference = Database.database().reference().child("Locations").child("post")
         databaseReference.queryOrdered(byChild: "parkname").queryEqual(toValue: pinView?.annotation?.title as! String).observe(DataEventType.childAdded) { (snapshot) in
@@ -213,9 +226,12 @@ class mapVC: UIViewController,MKMapViewDelegate , CLLocationManagerDelegate {
                         let myImage = imageView.sd_setImage(with: URL(string: self.resimUrl as! String))
                         snapshotView.addSubview(imageView)
                         pinView?.detailCalloutAccessoryView = snapshotView
+                        pinView?.tintColor = .black
                     }
                 }
             }
+            self.indicatorActivity.isHidden = true
+            self.indicatorActivity.stopAnimating()
         }
         
         print("pinview annot title \(pinView?.annotation?.title) )")
@@ -257,6 +273,11 @@ class mapVC: UIViewController,MKMapViewDelegate , CLLocationManagerDelegate {
             }
         
     }
+    
+    
+  
+    
+    
     @IBAction func parkListClicked(_ sender: Any) {
         self.performSegue(withIdentifier: "frommapVCtoplacesVC", sender: nil)
     }

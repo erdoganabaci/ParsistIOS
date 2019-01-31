@@ -63,6 +63,7 @@ class detailsVC: UIViewController , MKMapViewDelegate , CLLocationManagerDelegat
         if pinView == nil {
             pinView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: reuseID)
             pinView?.canShowCallout = true //yanına buton eklenebilir mi evet diyoruz
+            pinView?.tintColor = .black
             let button = UIButton(type: .detailDisclosure)
             //let button1 = UIButton(type: .infoLight)
             pinView?.rightCalloutAccessoryView = button

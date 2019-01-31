@@ -20,13 +20,20 @@
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="a6g-1v-FeN">
                                 <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                             </mapView>
+                            <activityIndicatorView opaque="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="750" verticalHuggingPriority="750" misplaced="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="6zG-CU-Gjb">
+                                <rect key="frame" x="177" y="355" width="20" height="20"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="a6g-1v-FeN" secondAttribute="trailing" id="BNf-fn-MeO"/>
-                            <constraint firstItem="a6g-1v-FeN" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="EvU-ZV-l1A"/>
-                            <constraint firstItem="a6g-1v-FeN" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="rmn-tq-evX"/>
-                            <constraint firstItem="a6g-1v-FeN" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="t30-aR-O17"/>
+                            <constraint firstItem="a6g-1v-FeN" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="4G3-0N-eOG"/>
+                            <constraint firstItem="a6g-1v-FeN" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="GIj-lY-9yV"/>
+                            <constraint firstItem="a6g-1v-FeN" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="Mke-Tc-ii3"/>
+                            <constraint firstItem="a6g-1v-FeN" firstAttribute="centerX" secondItem="6zG-CU-Gjb" secondAttribute="centerX" id="S8u-V0-Rk4"/>
+                            <constraint firstItem="a6g-1v-FeN" firstAttribute="centerY" secondItem="6zG-CU-Gjb" secondAttribute="centerY" id="TH7-ia-BuB"/>
+                            <constraint firstAttribute="trailing" secondItem="a6g-1v-FeN" secondAttribute="trailing" id="kRZ-Gd-2Tu"/>
+                            <constraint firstItem="6zG-CU-Gjb" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="291" id="maD-Vf-TmI"/>
+                            <constraint firstItem="6zG-CU-Gjb" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="177" id="ojz-hS-NEc"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
@@ -38,6 +45,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="indicatorActivity" destination="6zG-CU-Gjb" id="sMx-tE-rGa"/>
                         <outlet property="mapView" destination="a6g-1v-FeN" id="TOW-cw-eP9"/>
                         <segue destination="Ug4-zR-er2" kind="show" identifier="frommapVCtoplacesVC" id="Vjj-9C-wkd"/>
                     </connections>
